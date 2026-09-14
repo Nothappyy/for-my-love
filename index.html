@@ -8,20 +8,23 @@
 </head>
 <body>
 
-  <!-- Аудіоплеєр (схований) -->
+  <!-- Фонова музика -->
   <audio id="bg-music" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Контейнер для плаваючих сердечок -->
+  <!-- Контейнер для сердечок і конфеті -->
   <div id="hearts-container"></div>
 
   <div class="container">
 
-    <!-- Конверт -->
-    <div id="envelope" class="envelope" onclick="openEnvelope()">
-      <div class="wax-seal">ВІКТОРІЯ</div>
-      <p class="click-hint">натисни, щоб відкрити ✨</p>
+    <!-- Конверт з клапаном -->
+    <div id="envelope-wrapper" class="envelope-wrapper" onclick="openEnvelope()">
+      <div id="envelope" class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal">ВІКТОРІЯ</div>
+        <p class="click-hint">натисни, щоб відкрити ✨</p>
+      </div>
     </div>
 
     <!-- Лист -->
@@ -50,6 +53,9 @@
       </div>
 
       <div class="footer-sign">Твій Коханий</div>
+
+      <!-- Кнопка у відповідь -->
+      <button class="reply-btn" onclick="sendLove()">Обійняти у відповідь ❤️</button>
     </div>
 
   </div>
