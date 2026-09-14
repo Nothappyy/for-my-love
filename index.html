@@ -8,16 +8,23 @@
 </head>
 <body>
 
+  <!-- Аудіоплеєр (схований) -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container">
 
     <!-- Конверт -->
     <div id="envelope" class="envelope" onclick="openEnvelope()">
+      <div class="envelope-flap"></div>
       <div class="wax-seal">ВІКТОРІЯ</div>
-      <p class="click-hint">натисни на конверт</p>
+      <p class="click-hint">натисни, щоб відкрити ✨</p>
     </div>
 
     <!-- Лист -->
     <div id="letter" class="letter hidden">
+      <div class="heart-icon">❤️</div>
       <div class="letter-header">Кохана, це для тебе</div>
       <h1 class="title">Пробач мені</h1>
       
@@ -27,11 +34,17 @@
         Я замахався сваритися через всякі дрібниці :( Люблю тебе 😍
       </p>
 
-      <!-- Галерея фотографій з exact-назвами файлів -->
+      <!-- Галерея фотографій -->
       <div class="photo-gallery">
-        <img src="photo_2026-09-14_17-28-30.jpg" alt="Наше фото 1">
-        <img src="photo_2026-09-14_17-28-31 (2).jpg" alt="Наше фото 2">
-        <img src="photo_2026-09-14_17-28-31.jpg" alt="Наше фото 3">
+        <div class="photo-card card-1">
+          <img src="photo_2026-09-14_17-28-30.jpg" alt="Наше фото 1">
+        </div>
+        <div class="photo-card card-2">
+          <img src="photo_2026-09-14_17-28-31 (2).jpg" alt="Наше фото 2">
+        </div>
+        <div class="photo-card card-3">
+          <img src="photo_2026-09-14_17-28-31.jpg" alt="Наше фото 3">
+        </div>
       </div>
 
       <div class="footer-sign">Твій Коханий</div>
