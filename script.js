@@ -1,4 +1,4 @@
-// Генератор плаваючих сердечок на фоні
+// 1. Генерація плаваючих сердечок на фоні
 function createHeart() {
   const container = document.getElementById('hearts-container');
   if (!container) return;
@@ -6,56 +6,78 @@ function createHeart() {
   const heart = document.createElement('div');
   heart.classList.add('floating-heart');
   
-  // Випадкові символи сердечок
   const hearts = ['❤️', '💖', '💗', '💕', '🌸'];
   heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-
-  // Випадкова позиція по ширині
   heart.style.left = Math.random() * 100 + 'vw';
 
-  // Випадковий розмір
-  const size = Math.random() * 15 + 12; // від 12px до 27px
+  const size = Math.random() * 15 + 12;
   heart.style.fontSize = size + 'px';
 
-  // Випадкова тривалість анімації (від 6 до 12 секунд)
   const duration = Math.random() * 6 + 6;
   heart.style.animationDuration = duration + 's';
 
   container.appendChild(heart);
 
-  // Видаляємо елемент після завершення анімації
   setTimeout(() => {
     heart.remove();
   }, duration * 1000);
 }
 
-// Запускаємо створення сердечок кожні 400мс
 setInterval(createHeart, 400);
 
-// Логіка відкриття конверта
+// 2. Анімація салюту з конфеті
+function launchConfetti() {
+  const container = document.getElementById('hearts-container');
+  for (let i = 0; i < 35; i++) {
+    setTimeout(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.innerText = ['💖', '❤️', '✨', '🌸', '😍'][Math.floor(Math.random() * 5)];
+      heart.style.left = (Math.random() * 80 + 10) + 'vw';
+      heart.style.bottom = '20vh';
+      heart.style.fontSize = (Math.random() * 22 + 16) + 'px';
+      heart.style.animationDuration = (Math.random() * 2.5 + 2) + 's';
+      container.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3500);
+    }, i * 40);
+  }
+}
+
+// 3. Логіка відкриття конверта
 function openEnvelope() {
   const envelope = document.getElementById('envelope');
+  const envelopeWrapper = document.getElementById('envelope-wrapper');
   const letter = document.getElementById('letter');
   const music = document.getElementById('bg-music');
 
-  // Вмикаємо фонову музику
+  // Вмикаємо музику
   if (music) {
     music.volume = 0.5;
-    music.play().catch(error => {
-      console.log("Автовідтворення перехоплено браузером:", error);
-    });
+    music.play().catch(() => {});
   }
 
-  // Анімація згортання конверта
-  envelope.style.transform = 'scale(0.8) translateY(-20px)';
-  envelope.style.opacity = '0';
+  // Відгортаємо клапан конверта
+  envelope.classList.add('open');
 
+  // Затримка перед зникненням конверта та появою листа
   setTimeout(() => {
-    envelope.classList.add('hidden');
-    letter.classList.remove('hidden');
+    envelope.style.opacity = '0';
+    envelope.style.transform = 'translateY(40px) scale(0.85)';
 
     setTimeout(() => {
-      letter.classList.add('show');
-    }, 50);
-  }, 400);
+      envelopeWrapper.classList.add('hidden');
+      letter.classList.remove('hidden');
+
+      setTimeout(() => {
+        letter.classList.add('show');
+        launchConfetti(); // Запускаємо салют з конфеті!
+      }, 50);
+    }, 400);
+  }, 500);
+}
+
+// 4. Дія при натисканні на кнопку в кінці
+function sendLove() {
+  alert("Я тебе дуже кохаю! Дякую, що ти в мене є ❤️");
 }
