@@ -1,154 +1,45 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('floating-container');
+    const items = ['🍺', '🍻', '💵', '💰', '💸', '🎮'];
 
-body {
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    position: relative;
-    padding: 20px 0;
-}
-
-#floating-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.floating-item {
-    position: absolute;
-    bottom: -60px;
-    font-size: 2.2rem;
-    user-select: none;
-    animation: floatUp linear forwards;
-    opacity: 0.8;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
+    function createFloatingItem() {
+        if (!container) return;
+        
+        const item = document.createElement('div');
+        item.classList.add('floating-item');
+        
+        item.innerText = items[Math.floor(Math.random() * items.length)];
+        item.style.left = (Math.random() * 100) + 'vw';
+        
+        const size = (Math.random() * 1.5 + 1.8);
+        item.style.fontSize = size + 'rem';
+        
+        const duration = (Math.random() * 4 + 4);
+        item.style.animationDuration = duration + 's';
+        
+        container.appendChild(item);
+        
+        setTimeout(() => {
+            item.remove();
+        }, duration * 1000);
     }
-    100% {
-        transform: translateY(-115vh) rotate(360deg);
-        opacity: 0;
+
+    setInterval(() => {
+        createFloatingItem();
+    }, 350);
+
+    const button = document.getElementById('action-btn');
+    const secretMessage = document.getElementById('secret-message');
+
+    if (button && secretMessage) {
+        button.addEventListener('click', () => {
+            secretMessage.classList.toggle('hidden');
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createFloatingItem();
+                }, i * 50);
+            }
+        });
     }
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 2.5rem;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 440px;
-    width: 90%;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    z-index: 10;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.icon-header {
-    font-size: 4.5rem;
-    margin-bottom: 1rem;
-    animation: pulse 2s infinite ease-in-out;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #00ffcc;
-    text-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
-}
-
-.message {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #e0e0e0;
-    margin-bottom: 2rem;
-}
-
-button {
-    background: linear-gradient(45deg, #ff007f, #7928ca);
-    border: none;
-    color: white;
-    padding: 12px 30px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
-    transition: all 0.2s ease;
-}
-
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(255, 0, 127, 0.6);
-}
-
-button:active {
-    transform: scale(0.98);
-}
-
-.hidden {
-    display: none !important;
-}
-
-#secret-message {
-    margin-top: 1.5rem;
-    font-weight: bold;
-    color: #ffdd57;
-    animation: fadeInSlideIn 0.6s ease-out forwards;
-}
-
-.boost-photo {
-    width: 100%;
-    max-width: 360px;
-    height: auto;
-    border-radius: 14px;
-    margin-top: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    object-fit: cover;
-}
-
-.boost-text {
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    text-shadow: 0 0 5px rgba(255, 221, 87, 0.5);
-}
-
-@keyframes fadeInSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+});
