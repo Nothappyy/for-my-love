@@ -1,13 +1,20 @@
-.boost-photo {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    border-radius: 12px;
-    margin-top: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.boost-text {
-    margin-bottom: 10px;
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    
+    /* ВИПРАВЛЕННЯ ТУТ: */
+    height: auto;               /* Дозволяє висоті підлаштовуватися під контент */
+    max-height: 90vh;           /* Обмежує висоту, щоб картка не була вищою за екран */
+    overflow-y: auto;          /* Додає прокрутку всередині картки, якщо фото дуже велике */
+    
+    /* Плавна анімація появи */
+    transition: transform 0.3s ease, height 0.3s ease;
 }
