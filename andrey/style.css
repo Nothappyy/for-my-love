@@ -13,25 +13,26 @@ body {
     align-items: center;
     color: #fff;
     position: relative;
-    /* overflow прибираємо з body, щоб працювала прокрутка, якщо картка велика */
+    padding: 20px 0;
 }
 
 #floating-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden;
 }
 
 .floating-item {
     position: absolute;
-    bottom: -50px;
+    bottom: -60px;
     font-size: 2.2rem;
     user-select: none;
-    animation: floatUp linear infinite;
+    animation: floatUp linear forwards;
     opacity: 0.8;
 }
 
@@ -41,7 +42,7 @@ body {
         opacity: 1;
     }
     100% {
-        transform: translateY(-110vh) rotate(360deg);
+        transform: translateY(-115vh) rotate(360deg);
         opacity: 0;
     }
 }
@@ -49,19 +50,17 @@ body {
 .card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 2.5rem;
     border-radius: 20px;
     text-align: center;
-    max-width: 420px;
+    max-width: 440px;
     width: 90%;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     z-index: 10;
-    
-    /* ВИПРАВЛЕННЯ: Картка розширюється, але не вилазить */
     height: auto;
-    overflow-y: hidden; /* Щоб анімація фото не робила полоси прокрутки */
-    transition: transform 0.3s ease, height 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
@@ -116,27 +115,25 @@ button:active {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #secret-message {
     margin-top: 1.5rem;
     font-weight: bold;
     color: #ffdd57;
-    animation: fadeInSlideIn 0.8s ease-in-out forwards;
+    animation: fadeInSlideIn 0.6s ease-out forwards;
 }
 
 .boost-photo {
     width: 100%;
-    max-width: 340px;
+    max-width: 360px;
     height: auto;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 14px;
+    margin-top: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
     border: 3px solid rgba(255, 255, 255, 0.3);
     object-fit: cover;
-    opacity: 0;
-    animation: photoSlideUp 0.6s ease-out 0.3s forwards; /* Анімація появи */
 }
 
 .boost-text {
@@ -145,23 +142,10 @@ button:active {
     text-shadow: 0 0 5px rgba(255, 221, 87, 0.5);
 }
 
-/* Анімація для тексту */
 @keyframes fadeInSlideIn {
     from {
         opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Анімація для фото */
-@keyframes photoSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(-15px);
     }
     to {
         opacity: 1;
